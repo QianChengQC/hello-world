@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>绑定监听&事件修饰符&按键修饰符</title>
+</head>
+<body>
+
+<div id="example">
+    <h2>1,绑定监听</h2>
+    <button @click="test1">test1</button>
+    <button @click="test2('atguigu')">test2</button>
+    <button @click="test3($event)">test3333</button>
+
+    <h2>2,事件修饰符</h2>
+
+    <div style="width: 200px;height:200px; background-color: blue;" @click="test5">
+        <div style="width: 100px;height:100px; background-color: red;" @click.stop="test6($event)"></div>
+    </div>
+    <a href="http://www.baidu.com" @click.prevent="test7($event)">去百度</a>
+
+
+    <h2>3,按键修饰符</h2>
+
+    <input type="text" @keyup.13="test8">
+
+</div>
+
+
+<script type="text/javascript" src="static/js/vue.min.js"></script>
+<script type="text/javascript">
+    new Vue({
+        el:"#example",
+        data:{
+            test1(){
+                alert("test1");
+            },
+            test2(msg){
+                alert(msg);
+            },
+            test3(event){
+                alert(event.target.innerHTML);
+            },
+            test5(){
+                alert("outer");
+            },
+            test6(event){
+                event.stopPropagation();
+                alert("inner");
+            },
+            test7(event){
+                event.preventDefault();
+                alert("点击了");
+            },
+            test8(event){
+                if(event.keyCode === 13){
+                    alert(event.target.value);
+                }
+            }
+        }
+    });
+</script>
+</body>
+</html>

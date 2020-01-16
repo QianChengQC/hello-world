@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue的生命周期</title>
+</head>
+<body>
+<!--Vue的生命周期 -->
+<!--初始化显示-->
+<!--更新显示-->
+<!--死亡-->
+<div id="demo">
+    <button @click="destroyVM">destory vm</button>
+    <p v-show="isShow">生灵周期控制显示隐藏</p>
+
+</div>
+
+<script type="text/javascript" src="static/js/vue.min.js"></script>
+<script type="text/javascript">
+    new Vue({
+        el:"#demo",
+        data:{
+            isShow:true
+        },
+        mounted(){//初始化显示之后立即调用
+            this.intervalId = setInterval(() => {
+                console.log("-------");
+                this.isShow = !this.isShow;
+            },1000);
+        },
+        beforeDestroy(){
+            clearInterval(this.intervalId);
+        },
+        methods:{
+            destroyVM(){
+                this.$destroy();
+            }
+        }
+    });
+
+
+</script>
+
+</body>
+</html>
